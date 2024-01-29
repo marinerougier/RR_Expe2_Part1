@@ -125,7 +125,7 @@ connectedRef.on("value", function (snap) {
 
   var consent = {
     type:'external-html',
-    url: "https://marinerougier.github.io/RR_Expe1/external_page_consent.html",
+    url: "https://marinerougier.github.io/RR_Expe2_Part1/external_page_consent.html",
     cont_btn: "start",
     check_fn: check_consent,
         on_load: function() {
@@ -140,8 +140,8 @@ var browser_events_n = 1;
 
 // Variable input -----------------------------------------------------------------------
 var cond_AA = jsPsych.data.getURLVariable("cond_AA");
-  cond_AA = cond_AA == null ? jsPsych.randomization.sampleWithoutReplacement(["instruction"], 1)[0] : cond_AA; // assign random id if not provided in URL
-  //cond_AA = cond_AA == null ? jsPsych.randomization.sampleWithoutReplacement(["vaast", "instruction"], 1)[0] : cond_AA; // assign random id if not provided in URL
+  //cond_AA = cond_AA == null ? jsPsych.randomization.sampleWithoutReplacement(["instruction"], 1)[0] : cond_AA; // assign random id if not provided in URL
+  cond_AA = cond_AA == null ? jsPsych.randomization.sampleWithoutReplacement(["vaast", "instruction"], 1)[0] : cond_AA; // assign random id if not provided in URL
 
 // Target action (affiliative approach, aggressive approach, or avoidance)
 var target_action = jsPsych.data.getURLVariable("target_action");
@@ -1220,7 +1220,7 @@ if (is_compatible) {
     },
     on_finish: function () {
       saving_browser_events(completion = true);
-      window.location.href = "https://marinerougier.github.io/RR_Expe1/RC.html?id=" + id + "&prolificID=" + 
+      window.location.href = "https://marinerougier.github.io/RR_Expe2_Part1/RC.html?id=" + id + "&prolificID=" + 
       prolificID + "&cond_AA=" + cond_AA + "&control_cond=" + control_cond + "&target_action=" + target_action + "&color_target=" + color_target 
       + "&ColorGroup=" + ColorGroup;
     }
