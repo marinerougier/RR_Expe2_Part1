@@ -156,7 +156,7 @@
             html += "<p class = 'justify'>Pour chaque paire, votre tâche est de sélectionner le visage dont ";
             html += "vous pensez qu'il est <b>le plus similaire au groupe de visages qui avait un fond " + color1 + "</b> ";
             html += "dans la tâche précédente.</p>";
-            html += "<p class = 'justify'>utilisez votre souris d'ordinateur pour sélectionner un visage à chaque essai.</p>";
+            html += "<p class = 'justify'>Utilisez votre souris d'ordinateur pour sélectionner un visage à chaque essai.</p>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
             html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
@@ -173,9 +173,9 @@
             var html = "";
             html += "<h1>Tâche 2 : tâche d'identification</h1>";
             html += "<p class = 'justify'>Avant de commencer, veuillez noter que : </br></br>";
-            html += "<b>Il n'y a pas de bonnes ou de mauvaise réponse !</b> ";
+            html += "<b>Il n'y a pas de bonne ou de mauvaise réponse !</b> ";
             html += "Vous devez juste faire un choix aussi <b>intuitivement</b> que possible. ";
-            html += "En moyenne, a chaque essai, les participants prennent environ <b>1 seconde</b> ";
+            html += "En moyenne, à chaque essai, les participants prennent environ <b>1 seconde</b> ";
             html += "pour sélectionner un visage. Merci d'essayer de <b>maintenir un temps de réponse similaire</b>.</br></br>";
             html += "Vous devrez effectuer un total de 250 essais.</p>";
             html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour commencer</p>";
@@ -196,7 +196,7 @@
     },
     stimulus: function() {
       var html = "";
-      html += "<p class='justify'>La deuxième tâche est terminée. Nous allons maintenant vous poser quelques questions sur vous.</b></br></br>";
+      html += "<p class='justify'>La deuxième tâche est terminée. Nous allons maintenant vous poser quelques questions.</b></br></br>";
       html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
       return html;
     },
@@ -253,7 +253,7 @@
                 jsPsych.timelineVariable('trialImgs', true).map(function (e) {
                     html += "<img class='" + cssRC + "' src='" + e + "'>";
                 });
-                html += "</br>Trial: " + i + "/" + numOfPairs + "</br>";
+                html += "</br>Essai : " + i + "/" + numOfPairs + "</br>";
                 i += 1;
                 return html;
             },
@@ -263,11 +263,11 @@
 // Questions ---------------------------------------------------------------------------------------------------------------
 
 /* Instruction AA */
-   var appGrpOptions = ['approcher les visages avec un fond ' + genColor("#2a57ea", "bleu") + 'et rester immobile pour les visages avec un fond ' + genColor("#b5a21b", "jaune"), 'approcher les visages avec un fond ' + genColor("#b5a21b", "jaune") + 'et éviter les visages avec un fond ' + genColor("#2a57ea", "bleu"), 'Je ne me souviens pas'];
+   var appGrpOptions = ['Approcher les visages avec un fond ' + genColor("#2a57ea", "bleu") + ' et rester immobile pour les visages avec un fond ' + genColor("#b5a21b", "jaune"), 'Approcher les visages avec un fond ' + genColor("#b5a21b", "jaune") + ' et éviter les visages avec un fond ' + genColor("#2a57ea", "bleu"), 'Je ne me souviens pas'];
     var reportedAppGrp = {
         type: 'survey-multi-choice',
-        questions: [{ prompt: "Veuillez indiquer les instructions que vous avez reçues précédemment par rapport au fait d'approche (vs. de rester immobile):", options: appGrpOptions, required: true }],
-        button_label: "continue",
+        questions: [{ prompt: "Précédemment, vous avez reçu l'instruction de...", options: appGrpOptions, required: true }],
+        button_label: "continuer",
         on_finish: function (data) {
             jsPsych.data.addProperties({
                 reportedAppGrp: JSON.parse(data.responses).Q0,
@@ -412,7 +412,7 @@
         cond_AA: cond_AA,
         control_cond: control_cond,
         target_action: target_action,
-        color_target: color_target,
+        group_to_action: group_to_action,
         ColorGroup: ColorGroup,
         totalTime: jsPsych.totalTime()
       });

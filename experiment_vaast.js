@@ -458,7 +458,7 @@ var Gene_Instr_AA = {
     "<h1 class ='custom-title'> Expérience sur la catégorisation de visages</h1>" +
     "<br>" +
     "<p class='instructions'> Dans cette étude, nous nous intéressons à la manière dont les gens catégorisent " +
-    "autrui et, plus spécifiquement, le visage d'autrui. </p>" +
+    "autrui et, plus spécifiquement, leur visage. </p>" +
     "<p class='instructions'>Dans cette expérience, vous allez réaliser deux tâches : " +
     "<br>" +
     "- Tâche 1 : La tâche du Jeu Vidéo" +
@@ -528,7 +528,7 @@ var vaast_instructions_3_app_aff = {
     "en fonction de la couleur de fond (c'est-à-dire, " + group_to_action + " ou " + group_to_control + ") de ces images. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier:</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour une interaction verbale ou physique positive avec la personne qui se trouve en face de nous. " +
     "<br>" +
     "<br>" +
@@ -571,10 +571,10 @@ var vaast_instructions_5_app_agg = {
   type: "html-keyboard-response",
   stimulus:
     "<h1 class ='custom-title'> Tâche 1: tâche du Jeu Vidéo</h1>" +
-    "<p class='instructions'>Au début de chaque essau, vous verrez le symbole 'O'. " +
-    "Ce symbole indique que vous devrez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
+    "<p class='instructions'>Au début de chaque essai, vous verrez le symbole 'O'. " +
+    "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
-    "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, votre tâche consiste à avancer pour agresser en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
+    "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez avancer pour agresser en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
     "ou de rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
@@ -587,10 +587,10 @@ var vaast_instructions_5_app_aff = {
   type: "html-keyboard-response",
   stimulus:
     "<h1 class ='custom-title'> Tâche 1: tâche du Jeu Vidéo</h1>" +
-    "<p class='instructions'>Au début de chaque essau, vous verrez le symbole 'O'. " +
-    "Ce symbole indique que vous devrez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
+    "<p class='instructions'>Au début de chaque essai, vous verrez le symbole 'O'. " +
+    "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
-    "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, votre tâche consiste à avancer pour vous affilier en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
+    "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez avancer pour vous affilier en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
     "ou de rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
@@ -610,14 +610,14 @@ var vaast_instructions_6_app_agg = {
     "<br>" +
     "<br>" +
     "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
-    "<strong>En appuyant sur la touche D</strong>" +
+    "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
     "<p class='instructions'><strong>Notez également qu'il est EXTRÊMEMENT IMPORTANT que vous essayiez d'être aussi rapide et précis que possible. </strong>" +
     "Une croix rouge apparaîtra si votre réponse est incorrecte. </p>" +
     "<br>" +
     "<br>" +
-    "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour continuer. </p>",
+    "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour commencer la tâche. </p>",
   choices: [13]
 };
 
@@ -632,14 +632,14 @@ var vaast_instructions_6_app_aff = {
     "<br>" +
     "<br>" +
     "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
-    "<strong>En appuyant sur la touche D</strong>" +
+    "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
     "<p class='instructions'><strong>Notez également qu'il est EXTRÊMEMENT IMPORTANT que vous essayiez d'être aussi rapide et précis que possible. </strong>" +
     "Une croix rouge apparaîtra si votre réponse est incorrecte. </p>" +
     "<br>" +
     "<br>" +
-    "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour continuer. </p>",
+    "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour commencer la tâche. </p>",
   choices: [13]
 };
 
@@ -651,7 +651,7 @@ var Gene_Instr_cont = {
     "<h1 class ='custom-title'> Expérience sur la catégorisation de visages</h1>" +
     "<br>" +
     "<p class='instructions'> Dans cette étude, nous nous intéressons à la manière dont les gens catégorisent " +
-    "autrui et, plus spécifiquement, le visage d'autrui. </p>" +
+    "autrui et, plus spécifiquement, leur visage. </p>" +
     "<p class='instructions'>Dans cette expérience, vous allez réaliser trois tâches : " +
     "<br>" +
     "- Tâche 1 : La tâche de catégorisation" +
@@ -701,10 +701,10 @@ var vaast_instructions_5_cont = {
   type: "html-keyboard-response",
   stimulus:
     "<h1 class ='custom-title'> Tâche 1: tâche de catégorisation</h1>" +
-    "<p class='instructions'>Au début de chaque essau, vous verrez le symbole 'O'. " +
-    "Ce symbole indique que vous devrez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
+    "<p class='instructions'>Au début de chaque essai, vous verrez le symbole 'O'. " +
+    "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
-    "<p class='instructions'>En fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") de l'image, votre tâche consiste à appuyer sur la touche <b>F</b> "+
+    "<p class='instructions'>En fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez appuyer sur la touche <b>F</b> "+
     "ou sur la touche <b>S</b> aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
@@ -727,8 +727,7 @@ var vaast_instructions_6_cont = {
     "Une croix rouge apparaîtra si votre réponse est incorrecte. </p>" +
     "<br>" +
     "<br>" +
-    "<p class = 'continue-instructions'>Press <strong>ENTER</strong> to " +
-    "start the task.</p>",
+    "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour commencer la tâche. </p>",
   choices: [13]
 };
 
@@ -770,7 +769,7 @@ var vaast_instructions_8_app_aff_cont = {
     "en fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") des visages que vous avez vu précédemment. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier:</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour une interaction verbale ou physique positive avec la personne qui se trouve en face de nous. " +
     "<br>" +
     "<br>" +
@@ -855,7 +854,7 @@ var vaast_instructions_11_app_agg_cont = {
     "<br>" +
     "<br>" +
     "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
-    "<strong>En appuyant sur la touche D</strong>" +
+    "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'><b><u>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </b></u></p>" +
     "<p class='instructions'>Des instructions plus spécifiques suivront. </p>" +
@@ -876,14 +875,13 @@ var vaast_instructions_11_app_aff_cont = {
     "<br>" +
     "<br>" +
     "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
-    "<strong>En appuyant sur la touche D</strong>" +
+    "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'><b><u>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </b></u></p>" +
     "<p class='instructions'>Des instructions plus spécifiques suivront. </p>" +
     "<br>" +
     "<br>" +
     "<p class = 'continue-instructions'>Appuyez sur <strong>ENTRER</strong> pour continuer. </p>",
-    "continue.</p>",
   choices: [13]
 };
 
@@ -982,7 +980,7 @@ var vaast_training = {
     save_vaast_trial
   ],
   timeline_variables: vaast_stim_training,
-  repetitions: 12, //here, put 12 for 192 trials in total
+  repetitions: 1, //here, put 12 for 192 trials in total
   randomize_order: true,
   data: {
     phase: "training",
@@ -1063,7 +1061,7 @@ var vaast_control = {
     save_vaast_trial
   ],
   timeline_variables: vaast_stim_training,
-  repetitions: 12, //here, put 12 !!!!!
+  repetitions: 1, //here, put 12 !!!!!
   randomize_order: true,
   data: {
     phase: "control",
