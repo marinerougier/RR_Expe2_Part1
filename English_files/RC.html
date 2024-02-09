@@ -87,24 +87,24 @@
   var cond_AA = jsPsych.data.getURLVariable("cond_AA");
   var control_cond = jsPsych.data.getURLVariable("control_cond");
   var target_action = jsPsych.data.getURLVariable("target_action");
+  var color_target  = jsPsych.data.getURLVariable("color_target");
   var ColorGroup    = jsPsych.data.getURLVariable("ColorGroup");
-  var group_to_action = jsPsych.data.getURLVariable("group_to_action");
 
   var genColor = function (colorID, colorName) { return "<span style='color:" + colorID + "'><b>" + colorName + "</b></span>" };
 
-   if (group_to_action == "blue") {
-        var color1 = genColor("#2a57ea", "bleu");
-        var color2 = genColor("#b5a21b", "jaune");
+   if (color_target == "target_blue") {
+        var color1 = genColor("#2a57ea", "blue");
+        var color2 = genColor("#b5a21b", "yellow");
     } else {
-        var color1 = genColor("#b5a21b", "jaune");
-        var color2 = genColor("#2a57ea", "bleu");
+        var color1 = genColor("#b5a21b", "yellow");
+        var color2 = genColor("#2a57ea", "blue");
     };
 
   /* EXPERIMENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   /* Fullscreen mode & Consent */
     var activeFullscreen = {
       message: "",
-      button_label: "Cliquez ici pour commencer la tâche 2",
+      button_label: "Please click here to start Task 2",
       type: 'fullscreen',
       fullscreen_mode: true,
       delay_after: 200,
@@ -117,13 +117,13 @@
         choices: [32],
         stimulus: function () {
             var html = "";
-            html += "<h1>Tâche 2 : tâche d'identification</h1>";
-            html += "<p class = 'justify'>Pour commencer, nous vous informons que <b>chaque groupe de visages</b> que vous avez vu dans la tâche précédente ";
-            html += "(c'est-à-dire les visages avec un fond " + color1 + " et ceux avec un fond " + color2 + ") ";
-            html += "était en fait <b>très différent de l'autre groupe.</b></br></br>";
-            html += "De plus, <b>au sein de chaque groupe</b>, les visages partagent également une série de caractéristiques physiques ";
-            html += "qui les rendent <b>similaires</b> entre eux.</p>";
-            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            html += "<h1>Task 2: Face recognition task</h1>";
+            html += "<p class = 'justify'>For a start, let us inform you that <b>each group of faces</b> that you saw in the previous task ";
+            html += "(i.e., those with a " + color1 + " background and those with a " + color2 + " background) ";
+            html += "was in fact <b>very different from the other group.</b></br></br>";
+            html += "Moreover, <b>within each group</b>, the faces also shared a series of physical characteristics, ";
+            html += "making them <b>similar to each other</b>.</p>";
+            html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to continue</p>";
             return html;
         },
     };
@@ -135,13 +135,13 @@
         choices: [32],
         stimulus: function () {
             var html = "";
-            html += "<h1>Tâche 2 : tâche d'identification</h1>";
-            html += "<p class = 'justify'> Dans cette tâche, nous présenterons des paires de visages comme celle présentée ci-dessous. ";
-            html += "Là encore, ces visages ont été délibérément floutés, mais avec un type de flou différent. ";
-            html += "Par conséquent, les deux visages se ressemblent beaucoup.</p>";
+            html += "<h1>Task 2: Face recognition task</h1>";
+            html += "<p class = 'justify'> In this task, we will present pairs of faces like the ones shown below. ";
+            html += "Again, these faces have been deliberately blurred but with a different kind of blur. ";
+            html += "As a result, the two faces will look rather similar to each other.</p>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
-            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to continue</p>";
             return html;
         },
     };
@@ -152,14 +152,14 @@
         choices: [32],
         stimulus: function () {
             var html = "";
-            html += "<h1>Tâche 2 : tâche d'identification</h1>";
-            html += "<p class = 'justify'>Pour chaque paire, votre tâche est de sélectionner le visage dont ";
-            html += "vous pensez qu'il est <b>le plus similaire au groupe de visages qui avait un fond " + color1 + "</b> ";
-            html += "dans la tâche précédente.</p>";
-            html += "<p class = 'justify'>utilisez votre souris d'ordinateur pour sélectionner un visage à chaque essai.</p>";
+            html += "<h1>Task 2: Face recognition task</h1>";
+            html += "<p class = 'justify'>For each pair, your task is to select the one face that ";
+            html += "you think is <b>the most similar to the group of faces that had a " + color1 + " background</b> ";
+            html += "in the previous task.</p>";
+            html += "<p class = 'justify'>Use your mouse to select a face at each trial.</p>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
-            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to continue</p>";
             return html;
         },
     };
@@ -171,14 +171,14 @@
         choices: [32],
         stimulus: function () {
             var html = "";
-            html += "<h1>Tâche 2 : tâche d'identification</h1>";
-            html += "<p class = 'justify'>Avant de commencer, veuillez noter que : </br></br>";
-            html += "<b>Il n'y a pas de bonnes ou de mauvaise réponse !</b> ";
-            html += "Vous devez juste faire un choix aussi <b>intuitivement</b> que possible. ";
-            html += "En moyenne, a chaque essai, les participants prennent environ <b>1 seconde</b> ";
-            html += "pour sélectionner un visage. Merci d'essayer de <b>maintenir un temps de réponse similaire</b>.</br></br>";
-            html += "Vous devrez effectuer un total de 250 essais.</p>";
-            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour commencer</p>";
+            html += "<h1>Task 2: Face recognition task</h1>";
+            html += "<p class = 'justify'>Before you start, please note that: </br></br>";
+            html += "<b>There are no good or bad answers!</b> ";
+            html += "You just have to make a choice <b>as intuitively</b> as possible. ";
+            html += "On average, for each trial, participants take about <b>1 second</b> ";
+            html += "to select a face. Please <b>try to maintain a similar pace</b>.</br></br>";
+            html += "You will have to peform a total of 250 trials.</p>";
+            html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to start</p>";
             return html;
         },
     };
@@ -196,8 +196,8 @@
     },
     stimulus: function() {
       var html = "";
-      html += "<p class='justify'>La deuxième tâche est terminée. Nous allons maintenant vous poser quelques questions sur vous.</b></br></br>";
-      html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+      html += "<p class='justify'>TASK 2 is over. In this final phase, we will ask you a few questions.</b></br></br>";
+      html += "<p></br>Press <span class='light-keys'><kbd>space</kbd></span> to continue</p>";
       return html;
     },
   };
@@ -249,7 +249,7 @@
             },
             stimulus: function () {
                 html = "";
-                html += "<p>Sélectionnez le visage dont vous pensez qu'il est le plus similaire au groupe de visages qui avait un fond <b>"+color1+" dans la tâche précédente </b>:</p>";
+                html += "<p>Select the face that you think is the most similar to the group of faces that were presented with a <b>"+color1+" background in the previous task</b>:</p>";
                 jsPsych.timelineVariable('trialImgs', true).map(function (e) {
                     html += "<img class='" + cssRC + "' src='" + e + "'>";
                 });
@@ -263,10 +263,10 @@
 // Questions ---------------------------------------------------------------------------------------------------------------
 
 /* Instruction AA */
-   var appGrpOptions = ['approcher les visages avec un fond ' + genColor("#2a57ea", "bleu") + 'et rester immobile pour les visages avec un fond ' + genColor("#b5a21b", "jaune"), 'approcher les visages avec un fond ' + genColor("#b5a21b", "jaune") + 'et éviter les visages avec un fond ' + genColor("#2a57ea", "bleu"), 'Je ne me souviens pas'];
+   var appGrpOptions = ['approach ' + genColor("#2a57ea", "blue") + '-background and avoid ' + genColor("#b5a21b", "yellow") + '-background faces', 'approach ' + genColor("#b5a21b", "yellow") + '-background and avoid ' + genColor("#2a57ea", "blue") + '-background faces', 'I do not remember'];
     var reportedAppGrp = {
         type: 'survey-multi-choice',
-        questions: [{ prompt: "Veuillez indiquer les instructions que vous avez reçues précédemment par rapport au fait d'approche (vs. de rester immobile):", options: appGrpOptions, required: true }],
+        questions: [{ prompt: "Please indicate the approach vs. avoidance instructions you received previously:", options: appGrpOptions, required: true }],
         button_label: "continue",
         on_finish: function (data) {
             jsPsych.data.addProperties({
@@ -280,8 +280,8 @@
   var age = {
       timeline: [{
         type: 'survey-text',
-        questions: [{prompt: "Quel âge avez-vous ?", rows: 1, columns: 10}],
-        button_label: "Continuer",
+        questions: [{prompt: "How old are you?", rows: 1, columns: 10}],
+        button_label: "Continue",
       }],
       on_load: function() {
           window.scrollTo(0, 0);
@@ -292,7 +292,7 @@
         var age = data.values()[0].responses;
         var age = JSON.parse(age).Q0; 
         if(age == ""){
-          alert("Veuillez indiquer votre âge !"); 
+          alert("Please indicate your age"); 
           return true; 
         }
       },
@@ -305,8 +305,8 @@
 
   var gender = {
       type: 'survey-multi-choice',
-      questions: [{prompt: "Veuillez indiquer votre genre :", options: ['Homme', 'Femme', 'Autre'], required: true}],
-      button_label: "Continuer",
+      questions: [{prompt: "Please indicate your gender:", options: ['Male', 'Female', 'Other'], required: true}],
+      button_label: "Continue",
       on_finish: function(data) {
           jsPsych.data.addProperties({
               gender: JSON.parse(data.responses)["Q0"],
@@ -314,12 +314,32 @@
       },
   };
 
+  var Prolific_reported = {
+        timeline: [{
+            type: 'survey-text',
+            questions: [{ prompt: 'Please indicate your Prolific ID:', rows: 3, columns: 60 }],
+            button_label: "continue",
+        }],
+        loop_function: function (data) {
+            var res = data.values()[0].responses;
+            var res = JSON.parse(res).Q0;
+            if (res == "") {
+                alert("Please answer the question");
+                return true;
+            }
+        },
+        on_finish: function (data) {
+            jsPsych.data.addProperties({
+                Prolific_reported: JSON.parse(data.responses).Q0,
+            });
+        },
+    };
 
   var comments = {
         timeline: [{
             type: 'survey-text',
-            questions: [{ prompt: 'Avez-vous des commentaires par rapport à cette étude ? [Optionnel]', rows: 3, columns: 60 }],
-            button_label: "continuer",
+            questions: [{ prompt: 'Do you have comments regarding this study? [Optional]', rows: 3, columns: 60 }],
+            button_label: "continue",
         }],
         on_finish: function (data) {
             jsPsych.data.addProperties({
@@ -336,8 +356,8 @@
 
     /* DEBRIEF */
   var debrief = [];
-  debrief += "<h1>Fin de l'expérience. </h1>";
-  debrief += "<p class='justify'>Merci d'avoir participé à cette expérience ! <br><br>";
+  debrief += "<h1>End of the study</h1>";
+  debrief += "<p class='justify'>Thank you for participating in this online experiment!<br><br>";
   debrief += "In some experiments, we cannot tell people everything about the experiment at the beginning because their responses would not be ";
   debrief += "natural. For example, if we told people what the point of the experiment was ahead of time, then some people might do whatever ";
   debrief += "it is they think we want them to do, just to be helpful. Other people might do the exact opposite of what they think we want "; 
@@ -374,6 +394,7 @@
   timeline.push(reportedAppGrp);
   timeline.push(age);
   timeline.push(gender);
+  timeline.push(Prolific_reported);
   timeline.push(comments);
   timeline.push(exitFullscreen);
 
