@@ -88,17 +88,18 @@
   var control_cond = jsPsych.data.getURLVariable("control_cond");
   var target_action = jsPsych.data.getURLVariable("target_action");
   var ColorGroup    = jsPsych.data.getURLVariable("ColorGroup");
-  var group_to_action = jsPsych.data.getURLVariable("group_to_action");
+  var color_target = jsPsych.data.getURLVariable("color_target");
 
   var genColor = function (colorID, colorName) { return "<span style='color:" + colorID + "'><b>" + colorName + "</b></span>" };
 
-   if (group_to_action == "blue") {
+
+     if (color_target == "blue") {
         var color1 = genColor("#2a57ea", "bleu");
-        var color2 = genColor("#b5a21b", "jaune");
     } else {
         var color1 = genColor("#b5a21b", "jaune");
-        var color2 = genColor("#2a57ea", "bleu");
     };
+
+
 
   /* EXPERIMENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   /* Fullscreen mode & Consent */
@@ -412,7 +413,7 @@
         cond_AA: cond_AA,
         control_cond: control_cond,
         target_action: target_action,
-        group_to_action: group_to_action,
+        color_target: color_target,
         ColorGroup: ColorGroup,
         totalTime: jsPsych.totalTime()
       });

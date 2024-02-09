@@ -148,7 +148,7 @@ var target_action = jsPsych.data.getURLVariable("target_action");
   target_action = target_action == null ? jsPsych.randomization.sampleWithoutReplacement(["app_agg", "app_aff"], 1)[0] : target_action; // assign random id if not provided in URL
 
 // whether the Target action is related to blue or yellow
-var color_target = jsPsych.randomization.sampleWithoutReplacement(["target_blue", "target_yellow"], 1)[0];
+var color_target = jsPsych.randomization.sampleWithoutReplacement(["blue", "yellow"], 1)[0];
 
 // for the control condition, randomization of the F vs. S key (for the blue vs. yellow group)
 var control_cond = jsPsych.randomization.sampleWithoutReplacement(["blue_s", "blue_f"], 1)[0];
@@ -228,12 +228,12 @@ var group_to_control    = undefined;
 
 switch (target_action) {
   case "app_agg":
-    {if (color_target == "target_yellow"){
+    {if (color_target == "yellow"){
     movement_blue = "control";
     movement_yellow = "approach";
     group_to_action = yellow;
     group_to_control    = blue;
-    } else if (color_target == "target_blue"){
+    } else if (color_target == "blue"){
     movement_blue = "approach";
     movement_yellow = "control";
     group_to_action = blue;
@@ -242,12 +242,12 @@ switch (target_action) {
     break;
 
   case "app_aff":
-    {if (color_target == "target_yellow"){
+    {if (color_target == "yellow"){
     movement_blue = "control";
     movement_yellow = "approach";
     group_to_action = yellow;
     group_to_control    = blue;
-    } else if (color_target == "target_blue"){
+    } else if (color_target == "blue"){
     movement_blue = "approach";
     movement_yellow = "control";
     group_to_action = blue;
@@ -258,20 +258,33 @@ switch (target_action) {
 
 switch (control_cond) {
   case "blue_f":
-    movement_blue = "approach";
-    movement_yellow = "control";
-    group_to_action = blue;
-    group_to_control    = yellow;
-    break;
-
-  case "blue_s":
+    {if (color_target == "yellow"){
     movement_blue = "control";
     movement_yellow = "approach";
     group_to_action = yellow;
     group_to_control    = blue;
+    } else if (color_target == "blue"){
+    movement_blue = "approach";
+    movement_yellow = "control";
+    group_to_action = blue;
+    group_to_control    = yellow;
+    }};
+    break;
+    
+  case "blue_s":
+    {if (color_target == "yellow"){
+    movement_blue = "control";
+    movement_yellow = "approach";
+    group_to_action = yellow;
+    group_to_control    = blue;
+    } else if (color_target == "blue"){
+    movement_blue = "approach";
+    movement_yellow = "control";
+    group_to_action = blue;
+    group_to_control    = yellow;
+    }};
     break;
 }
-
 
 // VAAST stimuli ------------------------------------------------------------------------
 // vaast image stimuli ------------------------------------------------------------------
@@ -444,8 +457,8 @@ var save_vaast_trial = {
 // Switching to fullscreen --------------------------------------------------------------
 var fullscreen_trial = {
   type: 'fullscreen',
-  message: 'To start the study, please switch to fullscreen </br></br>',
-  button_label: 'Switch to fullscreen',
+  message: 'Pour commencer, vous devrez passer en mode plein écran</br></br>',
+  button_label: 'Passer au plein écran',
   fullscreen_mode: true
 }
 
@@ -575,7 +588,7 @@ var vaast_instructions_5_app_agg = {
     "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
     "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez avancer pour agresser en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
-    "ou de rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
+    "ou rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
     "<br>" +
@@ -591,7 +604,7 @@ var vaast_instructions_5_app_aff = {
     "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
     "<p class='instructions'>En fonction de la couleur de fond (" + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez avancer pour vous affilier en appuyant sur la touche AVANCER (c'est-à-dire, la touche <b>E</b>) "+
-    "ou de rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
+    "ou rester immobile en appuyant sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
     "<br>" +
@@ -605,11 +618,11 @@ var vaast_instructions_6_app_agg = {
     "<h1 class ='custom-title'> Tâche 1: tâche du Jeu Vidéo</h1>" +
     "<p class='instructions'>Plus précisément, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Avancer (pour agresser) les visages avec un fond " + group_to_action + " </strong></li>" +
+    "<li><strong>Avancer (pour agresser) les visages ayant un fond " + group_to_action + " </strong></li>" +
     "<strong>en appuyant sur la touche E</strong>" +
     "<br>" +
     "<br>" +
-    "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Rester immobile pour les visages ayant un fond " + group_to_control + " </strong></li>" +
     "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
@@ -627,11 +640,11 @@ var vaast_instructions_6_app_aff = {
     "<h1 class ='custom-title'> Tâche 1: tâche du Jeu Vidéo</h1>" +
     "<p class='instructions'>Plus précisément, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Avancer (pour vous affilier avec) les visages avec un fond " + group_to_action + " </strong></li>" +
+    "<li><strong>Avancer (pour vous affilier avec) les visages ayant un fond " + group_to_action + " </strong></li>" +
     "<strong>en appuyant sur la touche E</strong>" +
     "<br>" +
     "<br>" +
-    "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Rester immobile pour les visages ayant un fond " + group_to_control + " </strong></li>" +
     "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
@@ -719,8 +732,8 @@ var vaast_instructions_6_cont = {
     "<h1 class ='custom-title'> Tâche 1: tâche de catégorisation</h1>" +
     "<p class='instructions'>Plus précisément, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Appuyer sur la touche F pour les visages avec un fond " + group_to_action + " </strong></li>" +
-    "<li><strong>Appuyer sur la touche S pour les visages avec un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Appuyer sur la touche F pour les visages ayant un fond " + group_to_action + " </strong></li>" +
+    "<li><strong>Appuyer sur la touche S pour les visages ayant un fond " + group_to_control + " </strong></li>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
     "<p class='instructions'><strong>Notez également qu'il est EXTRÊMEMENT IMPORTANT que vous essayiez d'être aussi rapide et précis que possible. </strong>" +
@@ -849,11 +862,11 @@ var vaast_instructions_11_app_agg_cont = {
     "<h1 class ='custom-title'> Tâche du Jeu Vidéo</h1>" +
     "<p class='instructions'>Plus spécifiquement, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Avancer (pour agresser) les visages avec un fond " + group_to_action + " </strong></li>" +
+    "<li><strong>Avancer (pour agresser) les visages ayant un fond " + group_to_action + " </strong></li>" +
     "<strong>en appuyant sur la touche E</strong>" +
     "<br>" +
     "<br>" +
-    "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Rester immobile pour les visages ayant un fond " + group_to_control + " </strong></li>" +
     "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'><b><u>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </b></u></p>" +
@@ -870,11 +883,11 @@ var vaast_instructions_11_app_aff_cont = {
     "<h1 class ='custom-title'> Tâche du Jeu Vidéo</h1>" +
     "<p class='instructions'>Plus spécifiquement, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Avancer (pour vous affilier avec) les visages avec un fond " + group_to_action + " </strong></li>" +
+    "<li><strong>Avancer (pour vous affilier avec) les visages ayant un fond " + group_to_action + " </strong></li>" +
     "<strong>en appuyant sur la touche E</strong>" +
     "<br>" +
     "<br>" +
-    "<li><strong>Rester immobile pour les visages avec un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Rester immobile pour les visages ayant un fond " + group_to_control + " </strong></li>" +
     "<strong>en appuyant sur la touche D</strong>" +
     "</ul>" +
     "<p class='instructions'><b><u>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </b></u></p>" +
@@ -1195,7 +1208,7 @@ if (is_compatible) {
       saving_browser_events(completion = true);
       window.location.href = "https://marinerougier.github.io/RR_Expe2_Part1/RC.html?id=" + id + "&prolificID=" + 
       prolificID + "&cond_AA=" + cond_AA + "&control_cond=" + control_cond + "&target_action=" + target_action  
-      + "&ColorGroup=" + ColorGroup + "&group_to_action=" + group_to_action;
+      + "&ColorGroup=" + ColorGroup + "&color_target=" + color_target;
     }
   });
 }
