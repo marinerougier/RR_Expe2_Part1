@@ -118,7 +118,7 @@
         stimulus: function () {
             var html = "";
             html += "<h1>Task 2: Face recognition task</h1>";
-            html += "<p class = 'justify'>For a start, let us inform you that <b>each group of faces</b> that you saw in the Video Game task ";
+            html += "<p class = 'justify'>For a start, let us inform you that <b>each group of faces</b> that you saw in the previous task ";
             html += "(i.e., those with a " + color1 + " background and those with a " + color2 + " background) ";
             html += "was in fact <b>very different from the other group.</b></br></br>";
             html += "Moreover, <b>within each group</b>, the faces also shared a series of physical characteristics, ";
@@ -155,7 +155,7 @@
             html += "<h1>Task 2: Face recognition task</h1>";
             html += "<p class = 'justify'>For each pair, your task is to select the one face that ";
             html += "you think is <b>the most similar to the group of faces that had a " + color1 + " background</b> ";
-            html += "in the previous task (i.e., the Video Game task).</p>";
+            html += "in the previous task.</p>";
             html += "<p class = 'justify'>Use your mouse to select a face at each trial.</p>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
             html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
@@ -249,7 +249,7 @@
             },
             stimulus: function () {
                 html = "";
-                html += "<p>Select the face that you think is the most similar to the group of faces that were presented with a <b>"+color1+" background in the Video Game task</b>:</p>";
+                html += "<p>Select the face that you think is the most similar to the group of faces that were presented with a <b>"+color1+" background in the previous task</b>:</p>";
                 jsPsych.timelineVariable('trialImgs', true).map(function (e) {
                     html += "<img class='" + cssRC + "' src='" + e + "'>";
                 });
@@ -266,7 +266,7 @@
    var appGrpOptions = ['approach ' + genColor("#2a57ea", "blue") + '-background and avoid ' + genColor("#b5a21b", "yellow") + '-background faces', 'approach ' + genColor("#b5a21b", "yellow") + '-background and avoid ' + genColor("#2a57ea", "blue") + '-background faces', 'I do not remember'];
     var reportedAppGrp = {
         type: 'survey-multi-choice',
-        questions: [{ prompt: "Please indicate the instructions you received in the Video Game task:", options: appGrpOptions, required: true }],
+        questions: [{ prompt: "Please indicate the approach vs. avoidance instructions you received previously:", options: appGrpOptions, required: true }],
         button_label: "continue",
         on_finish: function (data) {
             jsPsych.data.addProperties({
@@ -365,12 +365,12 @@
   debrief += "really about, and they behave a certain way because of it, our results get messed up. That is because they are not behaving "; 
   debrief += "like they naturally would in the real world. The whole point of this experiment is to find out how people would ";
   debrief += "naturally behave.<br><br>";
-  debrief += "Now we would like to explain what we were trying to learn about with this study. In the first task (TASK 1), we systematically "; 
-  debrief += "asked you to approach or avoid a group of faces. You had to aggressively approach a group or to approach to affiliate with a group or "; 
+  debrief += "Now we would like to explain what we were trying to learn about with this study. In the first task (TASK 1), some participants systematically "; 
+  debrief += "asked you to approach or avoid a group of faces (other participants only had to categorize faces with the S or the F keys). Some of you had to aggressively approach a group or to approach to affiliate with a group or "; 
   debrief += "to avoid a group. Our hypothesis is that this action could have an influence on the way you perceive individuals of that group. <br><br>";
   debrief += "More specifically, our goal was to test whether TASK 1 could change how you visually represent faces of the group that you approached or avoided. "; 
-  debrief += "More specifically, if you aggressed the group or avoided the group, you should have a more negative visual representation "; 
-  debrief += "of the faces of this group as compared to if you approached the group to affiliate. We measured your visual representation of the group in TASK 2. <br><br>";
+  debrief += "If you aggressed the group or avoided the group, you should have a more negative visual representation "; 
+  debrief += "of the faces of this group as compared to if you approached the group to affiliate. We measured your visual representation of the group in TASK 2. For the participants who only categorized the faces and received the instructions to approach or avoid groups in a future task (but did not really perform those actions) we expect that the previous effects will be diminished. <br><br>";
   debrief += "We would like to emphasize that there are no correct responses in this study: We were looking at people’s natural responses. ";
   debrief += "We hope you understand that we couldn't tell you all of this before because it would have ruined our study. ";
   debrief += "Again, your responses will be anonymous and will be analyzed as part of a group of responses.</br></br>";
@@ -430,11 +430,14 @@
       jsPsych.data.addProperties({
         id: id,
         prolificID: prolificID,
+        cond_AA: cond_AA,
+        control_cond: control_cond,
         target_action: target_action,
         color_target: color_target,
         ColorGroup: ColorGroup,
         totalTime: jsPsych.totalTime()
       });
+
 
         var dataRC = jsPsych.data.get().filterCustom(function (x) {
           return x.task == "RC1" || x.task == "RC2"
