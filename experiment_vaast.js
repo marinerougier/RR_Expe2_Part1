@@ -1098,7 +1098,7 @@ var fullscreen_trial_exit = {
 
 var timeline = [];
 
-//timeline.push(consent);
+timeline.push(consent);
 
 // fullscreen
 timeline.push(
