@@ -220,71 +220,91 @@ preloadimages.push(faces);
 var movement_blue     = undefined;
 var movement_yellow   = undefined;
 var group_to_action = undefined;
+var group_to_S = undefined;
+var group_to_F = undefined;
 var group_to_control    = undefined;
 
  var genColor = function (colorID, colorName) { return "<span style='color:" + colorID + "'><b>" + colorName + "</b></span>" };
  var blue = genColor("#2a57ea", "bleu");
  var yellow = genColor("#b5a21b", "jaune");
 
-switch (target_action) {
-  case "app_agg":
-    {if (color_target == "yellow"){
-    movement_blue = "control";
-    movement_yellow = "approach";
-    group_to_action = yellow;
-    group_to_control    = blue;
-    } else if (color_target == "blue"){
-    movement_blue = "approach";
-    movement_yellow = "control";
-    group_to_action = blue;
-    group_to_control    = yellow;
-    }};
-    break;
 
-  case "app_aff":
-    {if (color_target == "yellow"){
-    movement_blue = "control";
-    movement_yellow = "approach";
-    group_to_action = yellow;
-    group_to_control    = blue;
-    } else if (color_target == "blue"){
-    movement_blue = "approach";
-    movement_yellow = "control";
-    group_to_action = blue;
-    group_to_control    = yellow;
-    }};
-    break;
-}
+switch (cond_AA) {
+  case "vaast":
 
-switch (control_cond) {
-  case "blue_f":
-    {if (color_target == "yellow"){
-    movement_blue = "control";
-    movement_yellow = "approach";
-    group_to_action = yellow;
-    group_to_control    = blue;
-    } else if (color_target == "blue"){
-    movement_blue = "approach";
-    movement_yellow = "control";
-    group_to_action = blue;
-    group_to_control    = yellow;
-    }};
-    break;
-    
-  case "blue_s":
-    {if (color_target == "yellow"){
-    movement_blue = "control";
-    movement_yellow = "approach";
-    group_to_action = yellow;
-    group_to_control    = blue;
-    } else if (color_target == "blue"){
-    movement_blue = "approach";
-    movement_yellow = "control";
-    group_to_action = blue;
-    group_to_control    = yellow;
-    }};
-    break;
-}
+      switch (target_action) {
+        case "app_agg":
+          {if (color_target == "yellow"){
+          movement_blue = "controlstart";
+          movement_yellow = "approach";
+          group_to_action = yellow;
+          group_to_control    = blue;
+          } else if (color_target == "blue"){
+          movement_blue = "approach";
+          movement_yellow = "controlstart";
+          group_to_action = blue;
+          group_to_control    = yellow;
+          }};
+          break;
+
+        case "app_aff":
+          {if (color_target == "yellow"){
+          movement_blue = "controlstart";
+          movement_yellow = "approach";
+          group_to_action = yellow;
+          group_to_control    = blue;
+          } else if (color_target == "blue"){
+          movement_blue = "approach";
+          movement_yellow = "controlstart";
+          group_to_action = blue;
+          group_to_control    = yellow;
+          }};
+          break;
+      }
+
+break;
+
+case "instruction":
+
+    switch (control_cond) {
+      case "blue_f":
+        {if (color_target == "yellow"){
+        movement_blue = "controlF";
+        movement_yellow = "controlS";
+        group_to_S = yellow;
+        group_to_F   = blue;
+        group_to_action = yellow;
+        group_to_control    = blue;
+        } else if (color_target == "blue"){
+        movement_blue = "controlF";
+        movement_yellow = "controlS";
+        group_to_S = yellow;
+        group_to_F   = blue;
+        group_to_action = blue;
+        group_to_control    = yellow;
+        }};
+        break;
+        
+      case "blue_s":
+        {if (color_target == "yellow"){
+        movement_blue = "controlS";
+        movement_yellow = "controlF";
+        group_to_F = yellow;
+        group_to_S    = blue;
+        group_to_action = yellow;
+        group_to_control    = blue;
+        } else if (color_target == "blue"){
+        movement_blue = "controlS";
+        movement_yellow = "controlF";
+        group_to_F = yellow;
+        group_to_S    = blue;
+        group_to_action = blue;
+        group_to_control    = yellow;
+        }};
+        break;
+    }
+break;
+      }
 
 // VAAST stimuli ------------------------------------------------------------------------
 // vaast image stimuli ------------------------------------------------------------------
@@ -381,7 +401,13 @@ var next_position_training = function () {
     position = position + 1;
   }
 
-  if (current_movement == "control") {
+  if (current_movement == "controlstart") {
+    position = position ;
+  }
+  if (current_movement == "controlF") {
+    position = position ;
+  }
+  if (current_movement == "controlS") {
     position = position ;
   }
   return (position)
@@ -732,8 +758,8 @@ var vaast_instructions_6_cont = {
     "<h1 class ='custom-title'> Tâche 1: tâche de catégorisation</h1>" +
     "<p class='instructions'>Plus précisément, vous devrez : " +
     "<ul class='instructions'>" +
-    "<li><strong>Appuyer sur la touche F pour les visages ayant un fond " + group_to_action + " </strong></li>" +
-    "<li><strong>Appuyer sur la touche S pour les visages ayant un fond " + group_to_control + " </strong></li>" +
+    "<li><strong>Appuyer sur la touche F pour les visages ayant un fond " + group_to_F + " </strong></li>" +
+    "<li><strong>Appuyer sur la touche S pour les visages ayant un fond " + group_to_S + " </strong></li>" +
     "</ul>" +
     "<p class='instructions'>Veuillez lire attentivement et mémoriser les instructions ci-dessus. </p>" +
     "<p class='instructions'><strong>Notez également qu'il est EXTRÊMEMENT IMPORTANT que vous essayiez d'être aussi rapide et précis que possible. </strong>" +
@@ -931,7 +957,8 @@ var vaast_start = {
   font_sizes: stim_sizes,
   approach_key: "d",
   stim_movement: "approach",
-  html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
+  //html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
+  html_when_wrong: '<span style="color: transparent; font-size: 80px">&times;</span>',
   force_correct_key_press: true,
   display_feedback: true,
   response_ends_trial: true
@@ -952,8 +979,7 @@ var vaast_first_step_training = {
   background_images: background,
   font_sizes: image_sizes,
   approach_key: "e",
-  //avoidance_key: "c",
-  control_key: "d",
+  control_start_key: "d",
   stim_movement: jsPsych.timelineVariable('movement'),
   html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
   force_correct_key_press: false,
@@ -1013,7 +1039,8 @@ var vaast_start_c = {
   font_sizes: stim_sizes,
   approach_key: "d",
   stim_movement: "approach",
-  html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
+  //html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
+  html_when_wrong: '<span style="color: transparent; font-size: 80px">&times;</span>',
   force_correct_key_press: true,
   display_feedback: true,
   response_ends_trial: true
@@ -1033,9 +1060,8 @@ var vaast_first_step_training_c = {
   position: 3,
   background_images: background,
   font_sizes: image_sizes,
-  approach_key: "f",
-  //avoidance_key: "f",
-  control_key: "s",
+  control_F_key: "f",
+  control_S_key: "s",
   stim_movement: jsPsych.timelineVariable('movement'),
   html_when_wrong: '<span style="color: red; font-size: 80px">&times;</span>',
   force_correct_key_press: false,
@@ -1098,7 +1124,7 @@ var fullscreen_trial_exit = {
 
 var timeline = [];
 
-timeline.push(consent);
+//timeline.push(consent);
 
 // fullscreen
 timeline.push(

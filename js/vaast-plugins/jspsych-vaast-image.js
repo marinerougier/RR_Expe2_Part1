@@ -25,19 +25,31 @@
       approach_key: {
         type: jsPsych.plugins.parameterType.HTML_STRING, 
         pretty_name: 'Approach key',
-        default: 'Z',
+        default: 'E',
         description: 'Key press that is associated with an approach movement.'
       },
       avoidance_key: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Avoidance key',
-        default: 'S',
+        default: 'C',
         description: 'Key press that is associated with an avoidance movement.'
       },
-      control_key: {
+      control_start_key: {
         type: jsPsych.plugins.parameterType.HTML_STRING, 
-        pretty_name: 'Control key',
+        pretty_name: 'Control key with start',
         default: 'D',
+        description: 'Key press that is associated with a control movement.'
+      },
+      control_S_key: {
+        type: jsPsych.plugins.parameterType.HTML_STRING, 
+        pretty_name: 'Control key with S',
+        default: 'S',
+        description: 'Key press that is associated with a control movement.'
+      },
+      control_F_key: {
+        type: jsPsych.plugins.parameterType.HTML_STRING, 
+        pretty_name: 'Control key with F',
+        default: 'F',
         description: 'Key press that is associated with a control movement.'
       },
       key_to_move_forward: {
@@ -74,9 +86,9 @@
       stim_movement: {
         type: jsPsych.plugins.parameterType.HTML_STRING,
         pretty_name: 'Stimulus key association',
-        options: ['approach', 'avoidance'],
+        options: ['approach', 'avoidance', 'controlstart', 'controlS', 'controlF'],
         default: 'undefined',
-        description: 'Stimulus will be associated with either "approach" or "avoidance".'
+        description: 'Stimulus will be associated with either "approach" or "avoidance" or "control"'
       },
       font_sizes: {
         type: jsPsych.plugins.parameterType.ARRAY,
@@ -166,8 +178,10 @@
     };
 
     var AppKeyCode = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.approach_key);
-    var ContKeyCode = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.control_key);
     var AvoKeyCode = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.avoidance_key);
+    var ContKeyCode_controlstart = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.control_start_key);
+    var ContKeyCode_controlF = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.control_F_key);
+    var ContKeyCode_controlS = jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.control_S_key);
 
     // function to handle responses by the subject
     var after_response = function(info) {
@@ -251,55 +265,126 @@
 
           }
         }
-      }
-    else if(trial.stim_movement == "control") {
-        if(response.rt !== null && response.key == ContKeyCode) {
-          response.correct = true;
-          if (trial.response_ends_trial) {
-            end_trial();
-          }
-        } else {
-          response.correct = false;
-          if(!trial.response_ends_trial && trial.display_feedback == true) {
-            wImg.style.visibility = "visible";
-          }
-          if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration !== null) {
-            wImg.style.visibility = "visible";
-            jsPsych.pluginAPI.setTimeout(function() {
-              end_trial();
-            }, trial.feedback_duration);
-          }
-          if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration == null) {
-            wImg.style.visibility = "visible";
-            if(trial.force_correct_key_press) {
-              var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
-                callback_function: end_trial,
-                valid_responses: [trial.control_key]
-              });
+      } else if (trial.stim_movement == "controlstart") {
+            if(response.rt !== null && response.key == ContKeyCode_controlstart) {
+              response.correct = true;
+              if (trial.response_ends_trial) {
+                end_trial();
+              }
             } else {
-            var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
-              callback_function: end_trial,
-              valid_responses: trial.key_to_move_forward
-            });}
-          } else if(trial.response_ends_trial && trial.display_feedback != true) {
-            end_trial();
-          } else if(!trial.response_ends_trial && trial.display_feedback != true) {
+              response.correct = false;
+              if(!trial.response_ends_trial && trial.display_feedback == true) {
+                wImg.style.visibility = "visible";
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration !== null) {
+                wImg.style.visibility = "visible";
+                jsPsych.pluginAPI.setTimeout(function() {
+                  end_trial();
+                }, trial.feedback_duration);
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration == null) {
+                wImg.style.visibility = "visible";
+                if(trial.force_correct_key_press) {
+                  var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                    callback_function: end_trial,
+                    valid_responses: [trial.control_start_key]
+                  });
+                } else {
+                var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                  callback_function: end_trial,
+                  valid_responses: trial.key_to_move_forward
+                });}
+               } else if(trial.response_ends_trial && trial.display_feedback != true) {
+                end_trial();
+              } else if(!trial.response_ends_trial && trial.display_feedback != true) {
 
-          }
-        }
-      }
+              }
+            }
+
+    } else if (trial.stim_movement == "controlS") {
+            if(response.rt !== null && response.key == ContKeyCode_controlS) {
+              response.correct = true;
+              if (trial.response_ends_trial) {
+                end_trial();
+              }
+            } else {
+              response.correct = false;
+              if(!trial.response_ends_trial && trial.display_feedback == true) {
+                wImg.style.visibility = "visible";
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration !== null) {
+                wImg.style.visibility = "visible";
+                jsPsych.pluginAPI.setTimeout(function() {
+                  end_trial();
+                }, trial.feedback_duration);
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration == null) {
+                wImg.style.visibility = "visible";
+                if(trial.force_correct_key_press) {
+                  var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                    callback_function: end_trial,
+                    valid_responses: [trial.control_S_key]
+                  });
+                } else {
+                var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                  callback_function: end_trial,
+                  valid_responses: trial.key_to_move_forward
+                });}
+               } else if(trial.response_ends_trial && trial.display_feedback != true) {
+                end_trial();
+              } else if(!trial.response_ends_trial && trial.display_feedback != true) {
+
+              }
+            }
+      } else if (trial.stim_movement == "controlF") {
+            if(response.rt !== null && response.key == ContKeyCode_controlF) {
+              response.correct = true;
+              if (trial.response_ends_trial) {
+                end_trial();
+              }
+            } else {
+              response.correct = false;
+              if(!trial.response_ends_trial && trial.display_feedback == true) {
+                wImg.style.visibility = "visible";
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration !== null) {
+                wImg.style.visibility = "visible";
+                jsPsych.pluginAPI.setTimeout(function() {
+                  end_trial();
+                }, trial.feedback_duration);
+              }
+              if(trial.response_ends_trial && trial.display_feedback == true && trial.feedback_duration == null) {
+                wImg.style.visibility = "visible";
+                if(trial.force_correct_key_press) {
+                  var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                    callback_function: end_trial,
+                    valid_responses: [trial.control_F_key]
+                  });
+                } else {
+                var keyListener = jsPsych.pluginAPI.getKeyboardResponse({
+                  callback_function: end_trial,
+                  valid_responses: trial.key_to_move_forward
+                });}
+               } else if(trial.response_ends_trial && trial.display_feedback != true) {
+                end_trial();
+              } else if(!trial.response_ends_trial && trial.display_feedback != true) {
+
+              }
+            }
+          }  
     };
 
     // start the response listener
-    if (trial.approach_key != jsPsych.NO_KEYS && trial.avoidance_key != jsPsych.NO_KEYS && trial.control_key != jsPsych.NO_KEYS) {
+    if (trial.approach_key != jsPsych.NO_KEYS && trial.avoidance_key != jsPsych.NO_KEYS && trial.control_start_key != jsPsych.NO_KEYS && trial.control_F_key != jsPsych.NO_KEYS && trial.control_S_key != jsPsych.NO_KEYS) {
       var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
-        valid_responses: [trial.approach_key, trial.avoidance_key, trial.control_key],
+        valid_responses: [trial.approach_key, trial.avoidance_key, trial.control_start_key, trial.control_F_key, trial.control_S_key],
         rt_method: 'date',
         persist: false,
         allow_held_key: false
       });
     }
+
 
     // end trial if time limit is set
     if (trial.trial_duration !== null && trial.response_ends_trial != true) {

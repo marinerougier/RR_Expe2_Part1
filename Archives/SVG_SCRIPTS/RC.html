@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>exp</title>
+  <script src="jsPsych-6.1.0/jspsych.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-fullscreen.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-html-button-response.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-survey-likert.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-survey-multi-choice.js"></script>
+  <script src="js/jspsych-html-slider-response_required.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-external-html.js"></script>
+  <script src="jsPsych-6.1.0/plugins/jspsych-html-mouse-response.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lodash.min.js"></script>
+  <script src="js/firebase.js"></script>
+  <link href="jsPsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      cursor: default;
+    }
+    .jspsych-content-wrapper {
+      width: 900px;
+      height: 4000px;
+    }
+    .paringsImgsLeft,
+    .paringsImgsRight {
+      height: 320px;
+      margin: 0px;
+    }
+    .imgInstr {
+      height: 150px; 
+    }
+    .paringsImgsLeft {
+      margin-right: 10px;
+    }
+    .imgJudge {
+      position: fixed;
+      width: 15%; 
+      margin: 0px;
+      padding: 0px;
+      top: 0px;
+      left:41%;
+      z-index: 2;
+    }
+    .imgBack {
+      position: fixed;
+      width: 70%; 
+      margin: 0px;
+      padding: 0px;
+      top: 0px;
+      left:15%;
+      z-index: 2;
+    }
+    .displayInstr {
+      height: 130px;
+    }
+    .rcimg-02{
+      cursor: pointer;
+    }
+    .rcimg-02 {
+      margin-top: 25px;
+      margin-bottom: 25px;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    .rcimg-02:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }    
+  </style>
+</head>
+<body></body>
+<script>
+
+  /* Parameters for the Reverse Correlation task */
+  var numOfPairsRC02 = 250;  // Total number of pair images images (inv & ori) = 250
+
+  /* Initial variables */
+  var timeline = [];
+  var preloadimages = [];
+  var id            = jsPsych.data.getURLVariable("id");
+  var prolificID    = jsPsych.data.getURLVariable("prolificID");
+  var cond_AA = jsPsych.data.getURLVariable("cond_AA");
+  var control_cond = jsPsych.data.getURLVariable("control_cond");
+  var target_action = jsPsych.data.getURLVariable("target_action");
+  var ColorGroup    = jsPsych.data.getURLVariable("ColorGroup");
+  var color_target = jsPsych.data.getURLVariable("color_target");
+
+  var genColor = function (colorID, colorName) { return "<span style='color:" + colorID + "'><b>" + colorName + "</b></span>" };
+
+
+     if (color_target == "blue") {
+        var color1 = genColor("#2a57ea", "bleu");
+        var color2 = genColor("#b5a21b", "jaune");
+    } else {
+        var color1 = genColor("#b5a21b", "jaune");
+        var color2 = genColor("#2a57ea", "bleu");
+    };
+
+
+
+  /* EXPERIMENT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  /* Fullscreen mode & Consent */
+    var activeFullscreen = {
+      message: "",
+      button_label: "Cliquez ici pour commencer la tâche 2",
+      type: 'fullscreen',
+      fullscreen_mode: true,
+      delay_after: 200,
+    };
+
+  /* RC instructions */
+     var RCinst1 = {
+        type: "html-keyboard-response",
+        post_trial_gap: 300,
+        choices: [32],
+        stimulus: function () {
+            var html = "";
+            html += "<h1>Tâche 2 : tâche d'identification</h1>";
+            html += "<p class = 'justify'>Pour commencer, nous vous informons que <b>chaque groupe de visages</b> que vous avez vu dans la tâche précédente ";
+            html += "(c'est-à-dire les visages avec un fond " + color1 + " et ceux avec un fond " + color2 + ") ";
+            html += "était en fait <b>très différent de l'autre groupe.</b></br></br>";
+            html += "De plus, <b>au sein de chaque groupe</b>, les visages partagent également une série de caractéristiques physiques ";
+            html += "qui les rendent <b>similaires</b> entre eux.</p>";
+            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            return html;
+        },
+    };
+
+
+    var RCinst2 = {
+        type: "html-keyboard-response",
+        post_trial_gap: 300,
+        choices: [32],
+        stimulus: function () {
+            var html = "";
+            html += "<h1>Tâche 2 : tâche d'identification</h1>";
+            html += "<p class = 'justify'> Dans cette tâche, nous présenterons des paires de visages comme celle présentée ci-dessous. ";
+            html += "Là encore, ces visages ont été délibérément floutés, mais avec un type de flou différent. ";
+            html += "Par conséquent, les deux visages se ressemblent beaucoup.</p>";
+            html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
+            html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
+            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            return html;
+        },
+    };
+
+    var RCinst3 = {
+        type: "html-keyboard-response",
+        post_trial_gap: 300,
+        choices: [32],
+        stimulus: function () {
+            var html = "";
+            html += "<h1>Tâche 2 : tâche d'identification</h1>";
+            html += "<p class = 'justify'>Pour chaque paire, votre tâche est de sélectionner le visage dont ";
+            html += "vous pensez qu'il est <b>le plus similaire au groupe de visages qui avait un fond " + color1 + "</b> ";
+            html += "dans la tâche précédente.</p>";
+            html += "<p class = 'justify'>Utilisez votre souris d'ordinateur pour sélectionner un visage à chaque essai.</p>";
+            html += "<img width='200' style='padding: 0px' src='" + './img/faceOri200.jpg?raw=1' + "'>";
+            html += "<img width='200' style='padding: 0px' src='" + './img/faceInv200.jpg?raw=1' + "'>";
+            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+            return html;
+        },
+    };
+
+
+    var RCinst4 = {
+        type: "html-keyboard-response",
+        post_trial_gap: 300,
+        choices: [32],
+        stimulus: function () {
+            var html = "";
+            html += "<h1>Tâche 2 : tâche d'identification</h1>";
+            html += "<p class = 'justify'>Avant de commencer, veuillez noter que : </br></br>";
+            html += "<b>Il n'y a pas de bonne ou de mauvaise réponse !</b> ";
+            html += "Vous devez juste faire un choix aussi <b>intuitivement</b> que possible. ";
+            html += "En moyenne, à chaque essai, les participants prennent environ <b>1 seconde</b> ";
+            html += "pour sélectionner un visage. Merci d'essayer de <b>maintenir un temps de réponse similaire</b>.</br></br>";
+            html += "Vous devrez effectuer un total de 250 essais.</p>";
+            html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour commencer</p>";
+            return html;
+        },
+    };
+
+
+
+  /* Questions INSTRUCTIONS */
+  var Instr_Quest = {
+    type: "html-keyboard-response",
+    post_trial_gap: 300,
+    choices: [32],
+    on_load: function() {
+          $('.jspsych-content-wrapper').css({ "width": "900px" });
+          $(".jspsych-content").css("max-width", "90%");
+    },
+    stimulus: function() {
+      var html = "";
+      html += "<p class='justify'>La deuxième tâche est terminée. Nous allons maintenant vous poser quelques questions.</b></br></br>";
+      html += "<p></br>Appuyez sur <span class='light-keys'><kbd>espace</kbd></span> pour continuer</p>";
+      return html;
+    },
+  };
+
+// RC ---------------------------------------------------------------------------------------------------------------
+    /* Generate RC trials */
+    var imgsRC02 = _.range(1, numOfPairsRC02 + 1); // generate numerical sequence
+
+    imgsRC02 = imgsRC02.map(function (e) { return ['./img/faceOri' + e + '.jpg', './img/faceInv' + e + '.jpg'] }); // pairs ori and inv
+    imgsRC02 = _.flattenDeep(imgsRC02);
+
+    // preload
+    preloadimages.push(imgsRC02);
+
+    // Full randomization:
+    // imgsRC02 = _.shuffle(imgsRC02);
+
+    // Full randomization but keep inv ori in the same trial
+    // imgsRC02 = _.flattenDeep(_.shuffle(_.chunk(imgsRC02, 2)));
+
+    // Create chunks
+    imgsRC02 = _.chunk(imgsRC02, 02); // 1 ori + 1 inv = 2 faces per trial
+
+    // Full randomization but keep inv ori in the same trial
+    // imgsRC02.map(function (e, i) { imgsRC02[i] = _.shuffle(e) });
+
+    var RC02_stim = [];
+    imgsRC02.map(function (e) { RC02_stim.push({ trialImgs: e }) });
+
+    /* RC */
+    var cssRC = "rcimg-02";
+    var imgWidth = 512;
+    var RCstim = RC02_stim;
+    var numOfPairs = numOfPairsRC02;
+    
+    var i = 1;
+    var RC1 = {
+        timeline_variables: RCstim,
+        randomize_order: true,
+        data: {
+            task: 'RC1',
+            numOfPairs: numOfPairs
+        },
+        timeline: [{
+            type: 'html-mouse-response',
+            on_load: function () {
+                        $('.jspsych-content-wrapper').css({ "width": "1100px" });
+                        $('.jspsych-content').css({ "max-width": "100%" });
+            },
+            stimulus: function () {
+                html = "";
+                html += "<p>Sélectionnez le visage dont vous pensez qu'il est le plus similaire au groupe de visages qui avait un fond <b>"+color1+" dans la tâche précédente </b>:</p>";
+                jsPsych.timelineVariable('trialImgs', true).map(function (e) {
+                    html += "<img class='" + cssRC + "' src='" + e + "'>";
+                });
+                html += "</br>Essai : " + i + "/" + numOfPairs + "</br>";
+                i += 1;
+                return html;
+            },
+        }]
+    };
+
+// Questions ---------------------------------------------------------------------------------------------------------------
+
+/* Instruction AA */
+   var appGrpOptions = ['Approcher les visages avec un fond ' + genColor("#2a57ea", "bleu") + ' et rester immobile pour les visages avec un fond ' + genColor("#b5a21b", "jaune"), 'Approcher les visages avec un fond ' + genColor("#b5a21b", "jaune") + ' et éviter les visages avec un fond ' + genColor("#2a57ea", "bleu"), 'Je ne me souviens pas'];
+    var reportedAppGrp = {
+        type: 'survey-multi-choice',
+        questions: [{ prompt: "Précédemment, vous avez reçu l'instruction de...", options: appGrpOptions, required: true }],
+        button_label: "continuer",
+        on_finish: function (data) {
+            jsPsych.data.addProperties({
+                reportedAppGrp: JSON.parse(data.responses).Q0,
+            });
+            console.log(data);
+        },
+    };
+
+ /* AGE */
+  var age = {
+      timeline: [{
+        type: 'survey-text',
+        questions: [{prompt: "Quel âge avez-vous ?", rows: 1, columns: 10}],
+        button_label: "Continuer",
+      }],
+      on_load: function() {
+          window.scrollTo(0, 0);
+          $(".jspsych-content").css("margin-top", "200px");
+          $(".jspsych-content").css("max-width", "90%");
+        },
+      loop_function: function(data){ 
+        var age = data.values()[0].responses;
+        var age = JSON.parse(age).Q0; 
+        if(age == ""){
+          alert("Veuillez indiquer votre âge !"); 
+          return true; 
+        }
+      },
+      on_finish: function(data) {
+          jsPsych.data.addProperties({
+              age: JSON.parse(data.responses)["Q0"],
+          });
+      },
+  };
+
+  var gender = {
+      type: 'survey-multi-choice',
+      questions: [{prompt: "Veuillez indiquer votre genre :", options: ['Homme', 'Femme', 'Autre'], required: true}],
+      button_label: "Continuer",
+      on_finish: function(data) {
+          jsPsych.data.addProperties({
+              gender: JSON.parse(data.responses)["Q0"],
+          });
+      },
+  };
+
+
+  var comments = {
+        timeline: [{
+            type: 'survey-text',
+            questions: [{ prompt: 'Avez-vous des commentaires par rapport à cette étude ? [Optionnel]', rows: 3, columns: 60 }],
+            button_label: "continuer",
+        }],
+        on_finish: function (data) {
+            jsPsych.data.addProperties({
+                Comment: JSON.parse(data.responses).Q0,
+            });
+        },
+    };
+
+ /* EXIT FULLSCREEN MODE */
+  var exitFullscreen = {
+    type: 'fullscreen',
+    fullscreen_mode: false
+  };
+
+    /* DEBRIEF */
+  var debrief = [];
+debrief += "<h1>Fin de l'expérience. </h1>";
+debrief += "<p class='justify'>Tout d'abord, un grand merci pour votre participation ! <br>";
+debrief += "Dans le cadre de votre TP de méthodologie, nous vous présentons maintenant les objectifs de notre étude ainsi que la méthode que nous avons utilisée.</p>";
+debrief += "<h1>Cadre théorique. </h1>";
+debrief += "<p class='justify'>Certains travaux ont déjà pu mettre en avant que l’information que nous recevons sur autrui sans jamais l’avoir vu va influencer la manière de se représenter cette personne, et notamment le visage de cette personne (Dotsch, Wigboldus, & Van Knippenberg, 2013; Ratner, Dotsch, Wigboldus, Van Knippenberg, & Amodio, 2014). Par exemple, le fait de savoir qu’un individu agit de manière généralement criminelle va conduire à se représenter le visage de cette personne comme ayant effectivement l’air plus criminel (Dotsch et al., 2013). D’autres travaux ont aussi pu montrer que le simple faire de savoir qu’un individu appartient au même groupe social que le notre ou à un groupe social différent va amener à se représenter le visage de cette personne comme plutôt positif (i.e., souriant) ou plutôt négatif (i.e., agressif), respectivement. Dans ce travail, notre but a été de tester si nos propres comportements envers autrui peuvent affecter la manière que nous avons de nous représenter le visage d’autrui. <br><br>";
+debrief += "<h1>Objectifs. </h1>";  
+debrief += "<p class='justify'>Notre recherche se situe précisément dans cet objectif : nous souhaitions tester si effectuer des actions répétées, ici d’approche agressive ou affiliative envers une personne inconnue allait affecter la représentation du visage de cette personne. Pour tester cette hypothèse, nous avons créé une tâche informatisée d’approche (la ‘tâche du Jeu Vidéo’) dans laquelle les participants devaient effectuer ou non des actions répétées d’approche (ou alors devait rester immobile) envers des visages neutres. Par exemple, certains participants devaient approcher le groupe de visages avec un fond bleu et rester immobile pour le groupe de visages avec un fond jaune. De manière importante, l’action d’approche faisait soit référence à une action d’agression soit à une action d’affiliation. Par ailleurs, certains participants dans la condition contrôle devaient effectuer une simple tâche de catégorisation (par ex. Appuyer sur la touche F pour les visages avec un fond bleu et sur la touche S pour les visages avec un fond jaune). Ces participants recevaient également les mêmes instructions d’approche que dans l’autre condition mais ils n’effectuaient pas l’entrainement : on leur faisait croire qu’ils allaient devoir le faire mais ils ne le faisaient en fait jamais. <br><br>";
+debrief += "<p class='justify'>Ensuite, tous les participants effectuaient une tâche de Reverse Correlation (Dotsch et al., 2008) visant à mesurer la représentation visuelle qu’avaient nos participants d’un des groupes de visages (par exemple, les visages avec un fond bleu). Nous faisions l’hypothèse que la représentation visuelle du groupe ayant été agressé sera plus négative que la représentation visuelle du groupe avec lequel les participants se sont affiliés. Par ailleurs, cet effet devrait être moins fort pour les participants de la condition contrôle n’ayant pas effectué ces actions (mais ayant reçu des instructions similaires).<br><br>";
+debrief += "<h1>Méthode. </h1>";  
+debrief += "<p class='justify'><br>Procédure</b><br> L’expérience était composée de 2 étapes. Lorsque les participants arrivaient au labo, on leur indiquait que notre recherche portait sur la catégorisation de visages. Premièrement, la moitié des participants effectuait un entrainement d’approche où ils devaient approcher les visages du groupe bleu et rester immobile pour le groupe jaune (ou effectuer des actions inverses, cette consigne étant contrebalancée entre les participants). La tâche était annoncée comme une tâche de ‘jeu vidéo’. Les participants devaient appuyer sur la touche E pour approcher les visages et sur la touche D pour rester immobiles. La catégorisation des visages avec les touches d’approche générait une impression visuelle de mouvement avant vers la cible. L’autre moitié des participants commençait par une tâche contrôle (simple catégorisation des visages avec les touches F ou S sans qu’il n’y ait aucun mouvement d’approche). Après avoir effectué cette tâche de catégorisation, les participants recevaient les mêmes instructions d’approche que dans l’autre condition mais n’effectuaient jamais cette tâche du jeu vidéo. De manière importante, dans les deux conditions, pour la moitié des participants, l’action d’approche était décrite comme affiliative et pour l’autre moitié elle était décrite comme agressive. Deuxièmement, les participants devaient faire la tâche de reverse correlation (présentée comme une tâche d’identification). Dans cette tâche, on demandait aux participants de sélectionner le visage qui correspondait le mieux au groupe des visages reliés à l’approche dans la tâche précédente. A chaque essai, les participants avaient 2 possibilités de réponse. Lors de l’analyse, tous les visages “choisis” étaient ensuite moyennés de sorte à obtenir visuellement la représentation visuelle moyenne d'un individu approché (soit de manière agressive, soit de manière affiliative). L’étude se terminait ensuite par un débriefing expliquant le but de l’expérience. Notre hypothèse était que les visages obtenus dans la tâche de reverse correlation devraient dépendre des actions ayant été effectuées au préalable dans la tâche d’approche envers ces visages. Plus spécifiquement, la représentation du groupe ayant été approché de manière affiliative devrait être plus positive que la représentation du groupe ayant été approché de manière agressive. Cette différence devrait être moins forte dans la condition contrôle. <br><br>";
+debrief += "<p class='justify'><br>Participants</b><br> Un minimum de 400 participants était requis pour l’étude.<br><br>";
+debrief += "<p class='justify'><br>Design Expérimental</b><br> Variable indépendante 1 : instruction associée au visage (approche agressive vs. approche affiliative) <br>Variable indépendante 2 : condition d’approche (entrainement vs. contrôle) <br>Variable dépendante : évaluation du visage obtenu (par un groupe de juges indépendants) en tâche de reverse correlation <br><br>";
+debrief += "<p class='justify'><br>Outils utilisés</b><br>Ordinateur <br><br>";
+debrief += "<h1>Analyses de données. </h1>";  
+debrief += "<p class='justify'>Analyses en Modèles Mixtes, comparables au General Linear Model pour mesures répétées mais tenant compte de la variabilité à travers nos participants et de la variabilité à travers nos stimuli.<br><br>";
+debrief += "<h1>Fin de l’expérience. </h1>";  
+debrief += "<p class='justify'> Encore merci pour votre participation ! Nous vous rappelons qu’il est important de ne pas diffuser les informations relatives à l’expérience car les résultats (et leur application) risquent d'être différents si les participants (qui sont peut-être des gens que vous connaissez) sont conscients de nos hypothèses de recherche. Nous vous remercions pour votre compréhension. Si vous avez des questions, des réactions ou si vous souhaitez avoir plus d'informations à propos de ces recherches ou connaître les résultats de cette étude en particulier, n'hésitez pas à me contacter à l'adresse suivante : marine.rougier@uclouvain.be<br><br>";
+
+
+  /* TIMELINES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  timeline.push(activeFullscreen);
+  timeline.push(RCinst1);
+  timeline.push(RCinst2);
+  timeline.push(RCinst3);
+  timeline.push(RCinst4);
+  timeline.push(RC1);
+  timeline.push(Instr_Quest);
+  timeline.push(reportedAppGrp);
+  timeline.push(age);
+  timeline.push(gender);
+  timeline.push(comments);
+  timeline.push(exitFullscreen);
+
+  preloadimages = _.flattenDeep(preloadimages);
+
+  timeline = _.flattenDeep(timeline); // do not remove this!
+
+  /* INITIALISE EXP  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+  jsPsych.init({
+    timeline: timeline,
+    preload_images: preloadimages,
+    max_load_time: 500*1000,
+    exclusions: {
+      min_width: 1100,
+      min_height: 600,
+      max_width: 1600,
+      max_height: 900,
+    },
+    on_finish: function (data) {
+      $("#jspsych-content").html("<img src='https://i.gifer.com/4V0b.gif'>");
+
+
+      /* Initialize Firebase */
+      var config = {
+        apiKey: "AIzaSyAPTEPrT8V9T1-GouWXnW6jknK3brmagJs",
+        databaseURL: "https://postdocgent.firebaseio.com/"
+      };
+
+      firebase.initializeApp(config);
+      var database = firebase.database();
+
+      /* jsPsych: add data to every trial */
+      jsPsych.data.addProperties({
+        id: id,
+        prolificID: prolificID,
+        cond_AA: cond_AA,
+        control_cond: control_cond,
+        target_action: target_action,
+        color_target: color_target,
+        ColorGroup: ColorGroup,
+        totalTime: jsPsych.totalTime()
+      });
+
+
+        var dataRC = jsPsych.data.get().filterCustom(function (x) {
+          return x.task == "RC1" || x.task == "RC2"
+        }).csv();
+
+      /* Send data to Firebase */
+      database
+        .ref("RR_Expe2_RC/" + id + "/")
+        .update({ dataRC })
+        .then(function () {
+              console.log("Data sent!");
+              $("#jspsych-content").html(debrief);        });
+    }
+  });
+</script>
+
+</html>
