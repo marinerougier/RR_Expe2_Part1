@@ -551,7 +551,7 @@ var vaast_instructions_3_app_agg = {
     "en fonction de la couleur de fond (c'est-à-dire, " + group_to_action + " ou " + group_to_control + ") de ces images. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>agresser :</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>AVANCER veut dire <u><i>AGRESSER :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour agresser verbalement ou physiquement la personne en face de nous. " +
     "<br>" +
     "<br>" +
@@ -567,7 +567,7 @@ var vaast_instructions_3_app_aff = {
     "en fonction de la couleur de fond (c'est-à-dire, " + group_to_action + " ou " + group_to_control + ") de ces images. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier :</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>AVANCER veut dire <u><i>S'AFFILIER :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour une interaction verbale ou physique positive avec la personne qui se trouve en face de nous. " +
     "<br>" +
     "<br>" +
@@ -744,7 +744,7 @@ var vaast_instructions_5_cont = {
     "Ce symbole indique que vous devez appuyer sur la touche DEPART (c'est-à-dire, la touche <b>D</b>) pour commencer l'essai. </p>" +
     "<p class='instructions'>Par la suite, vous verrez une croix de fixation (+) au centre de l'écran, suivie d'un visage. </p>" +
     "<p class='instructions'>En fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") de l'image, vous devrez appuyer sur la touche <b>F</b> "+
-    "ou sur la touche <b>S</b> aussi rapidement que possible. Après l'appui sur la touche, le visage disparaîtra et vous devrez " +
+    "ou sur la touche <b>S</b> aussi rapidement que possible. Peu de temps après l'appui sur la touche, le visage disparaîtra et vous devrez " +
     "appuyer de nouveau sur la touche DEPART (touche D). " +
     "<p class='instructions'><b>Veuillez <u>utiliser seulement l'index</u> de votre main dominante pour toutes ces actions. </b></p>" +
     "<br>" +
@@ -775,7 +775,7 @@ var vaast_instructions_7_cont = {
   type: "html-keyboard-response",
   stimulus:
     "<h1 class ='custom-title'> Tâche du Jeu Vidéo</h1>" +
-    "<p class='instructions'>Comme dans un jeu vidéo, vous allez maintenant pouvoir " +
+    "<p class='instructions'>Comme dans un jeu vidéo, vous allez pouvoir " +
     "avancer dans l'environnement présenté ci-dessous. </p>" +
     "<br>" +
     "<img src = 'media/vaast-background.png'>" +
@@ -792,7 +792,7 @@ var vaast_instructions_8_app_agg_cont = {
     "en fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") des visages que vous avez vu précédemment. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>agresser :</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>AVANCER veut dire <u><i>AGRESSER :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour agresser verbalement ou physiquement la personne en face de nous. " +
     "<br>" +
     "<br>" +
@@ -808,7 +808,7 @@ var vaast_instructions_8_app_aff_cont = {
     "en fonction de la couleur de fond (c'est-à-dire " + group_to_action + " ou " + group_to_control + ") des visages que vous avez vu précédemment. "+
     "Des instructions plus spécifiques suivront. <br>" +
     "<br><u>Lisez attentivement les informations ci-après :</u><br><br>" +
-     "Dans cette expérience, <b>avancer veut dire <u><i>s'affilier :</i></u></b> cela représente les situations " +
+     "Dans cette expérience, <b>AVANCER veut dire <u><i>S'AFFILIER :</i></u></b> cela représente les situations " +
     "<strong>dans lesquelles nous nous approchons pour une interaction verbale ou physique positive avec la personne qui se trouve en face de nous. " +
     "<br>" +
     "<br>" +
@@ -927,7 +927,7 @@ var vaast_instructions_11_app_aff_cont = {
 var vaast_instructions_12_cont = {
   type: "html-keyboard-response",
   stimulus:
-    "<p class='instructions'>Avant de commencer la tâche du Jeu Vidéo, vous allez devoir effectuer une autre " +
+    "<p class='instructions'>Avant de pouvoir commencer cette tâche du Jeu Vidéo, nous allons vous demander d'effectuer une autre " +
     "tâche appelée 'tâche d'identification' (tâche 2). </p>" +
     "<br>" +
     "<p class='instructions'>Vous effectuerez la tâche du Jeu Vidéo à la toute fin de l'expérience. </p>" +
